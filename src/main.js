@@ -778,6 +778,21 @@ app.controller('MainController', ['$mdSidenav', '$window', 'UiEvents', '$locatio
                                             }
                                         }
                                     }
+                                    if (msg.group.hasOwnProperty("class")) {
+                                        if (typeof msg.group.class == "object" && typeof msg.group.class[c] == "object" && msg.group.class[d].hasOwnProperty(d)) {
+                                            const {set, add, remove, toggle} = msg.group.class[c];
+                                            if (typeof localStorage !== 'undefined' && localStorage.getItem(c) == "true") {
+                                                const el = $("#"+c);
+                                                if(set) {
+                                                    el.removeClass();
+                                                    el.addClass(add); 
+                                                }
+                                                if(add) { el.addClass(add); }
+                                                if(remove) { el.removeClass(remove); }
+                                                if(toggle) { el.toggleClass(); }
+                                            }
+                                        }
+                                    }        
                                     $(window).trigger('resize');
                                 }
                             }
